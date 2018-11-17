@@ -1,0 +1,47 @@
+<PreferenceScreen
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+
+    android:layout_width ="match_parent"
+    android:layout_height="match_parent">
+
+    <EditTextPreference
+        android:title        ="Attack"
+        android:key          ="attack"
+        android:defaultValue ="-1"
+        android:inputType    ="number"
+        android:singleLine   ="true">
+    </EditTextPreference>
+
+    <SwitchPreference
+        android:title           ="Only Collectible"
+        android:key             ="collectible"
+        android:defaultValue    ="true">
+
+    </SwitchPreference>
+
+    <EditTextPreference
+        android:title        ="Cost"
+        android:key          ="cost"
+        android:defaultValue ="-1"
+        android:inputType    ="number"
+        android:singleLine   ="true">
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:title        ="Durability"
+        android:key          ="durability"
+        android:defaultValue ="-1"
+        android:inputType    ="number"
+        android:singleLine   ="true">
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:title        ="Health"
+        android:key          ="health"
+        android:defaultValue ="-1"
+        android:inputType    ="number"
+        android:singleLine   ="true">
+    </EditTextPreference>
+
+
+</PreferenceScreen>
