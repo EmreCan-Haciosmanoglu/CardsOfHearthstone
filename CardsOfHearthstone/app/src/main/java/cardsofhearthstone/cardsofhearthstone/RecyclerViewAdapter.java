@@ -14,17 +14,19 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHolder> {
     private Context mContext;
     private ArrayList<Datas> mDataList;
+    private ListItemClickListener mOnClickListener;
 
-    public RecyclerViewAdapter(Context Context, ArrayList<Datas> DataList) {
+    public RecyclerViewAdapter(Context Context, ArrayList<Datas> DataList, ListItemClickListener listener) {
         mContext = Context;
         mDataList=DataList;
+        mOnClickListener = listener;
     }
 
     @NonNull
     @Override
     public RecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_list_item,viewGroup,false);
-        return new RecyclerViewViewHolder(view);
+        return new RecyclerViewViewHolder(view, mOnClickListener);
 
     }
 
@@ -40,16 +42,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
         return Datas.getData().size();
     }
 }
-class RecyclerViewViewHolder extends RecyclerView.ViewHolder{
+class RecyclerViewViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     public ImageView image;
+    private  ListItemClickListener mListener;
 
-    public RecyclerViewViewHolder(@NonNull View itemView) {
+    public RecyclerViewViewHolder(@NonNull View itemView, ListItemClickListener listener) {
         super(itemView);
         image=itemView.findViewById(R.id.imageView);
+        mListener = listener;
+        image.setOnClickListener(this);
 
 
     }
     public void setData(Datas clickedData, int i) {
         this.image.setImageResource(clickedData.getImageId());
+    }
+
+    @Override
+    public void onClick(View v) {
+        int clickedPosition = getAdapterPosition();
+        mListener.onListItemClick(clickedPosition);
     }
 }

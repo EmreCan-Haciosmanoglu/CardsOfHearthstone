@@ -22,8 +22,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button button=(Button)findViewById(R.id.startButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button button1=(Button)findViewById(R.id.startButton);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,RecyclerActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button button2=(Button)findViewById(R.id.startButton);
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,RecyclerActivity.class);
