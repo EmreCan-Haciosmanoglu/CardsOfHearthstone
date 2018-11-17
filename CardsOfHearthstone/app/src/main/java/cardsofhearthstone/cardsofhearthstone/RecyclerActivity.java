@@ -1,5 +1,6 @@
 package cardsofhearthstone.cardsofhearthstone;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,40 +11,41 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 public class RecyclerActivity extends AppCompatActivity implements ListItemClickListener{
 
+    public RecyclerView recyclerView;
+    public GridLayoutManager gridLayoutManager;
+    LinearLayoutManager layoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Something(null);
-    }
-
-    private void Something (Configuration newConfig)
-    {
         setContentView(R.layout.activity_recycler);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         RecyclerViewAdapter adapter=new RecyclerViewAdapter(this,Datas.getData(),this);
-        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView=(RecyclerView)findViewById(R.id.recyclerView);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        gridLayoutManager = new GridLayoutManager(this,2);
+        layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
 
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
-
-        if(newConfig != null && newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
+            Log.v("tagg","land");
             recyclerView.setLayoutManager(gridLayoutManager);
+
         }
-        if(newConfig != null && newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-        {
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
             recyclerView.setLayoutManager(layoutManager);
+            Log.v("tagg","port");
+
         }
+
+
     }
 
 
@@ -58,9 +60,5 @@ public class RecyclerActivity extends AppCompatActivity implements ListItemClick
 
         startActivity(detailActivityIntent);
     }
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Something(newConfig);
-    }
+
 }
