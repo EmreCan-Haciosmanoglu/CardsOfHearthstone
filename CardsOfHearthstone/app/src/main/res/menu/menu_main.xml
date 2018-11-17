@@ -4,7 +4,22 @@
     tools:context="cardsofhearthstone.cardsofhearthstone.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_recycler"
+        android:orderInCategory="101"
+        android:title="@string/action_recycler"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_main"
+        android:orderInCategory="100"
+        android:title="@string/action_main"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="103"
+        android:title="@string/action_help"
         app:showAsAction="never" />
 </menu>

@@ -21,6 +21,9 @@ public class DetailActivity extends AppCompatActivity {
         Intent intentThatStartedThisActivity;
         String[]   forecastStr;
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
