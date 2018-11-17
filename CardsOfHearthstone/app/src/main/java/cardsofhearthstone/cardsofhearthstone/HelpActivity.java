@@ -1,10 +1,12 @@
 package cardsofhearthstone.cardsofhearthstone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 public class HelpActivity extends AppCompatActivity {
@@ -25,6 +27,36 @@ public class HelpActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings)
+        {
+            Intent intent = new Intent(HelpActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_help)
+        {
+            Intent intent = new Intent(HelpActivity.this, HelpActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_main)
+        {
+            Intent intent = new Intent(HelpActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_recycler)
+        {
+            Intent intent = new Intent(HelpActivity.this, RecyclerActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 public class RecyclerActivity extends AppCompatActivity implements ListItemClickListener{
@@ -59,6 +60,36 @@ public class RecyclerActivity extends AppCompatActivity implements ListItemClick
         detailActivityIntent.putExtra(Intent.EXTRA_TEXT, data);
 
         startActivity(detailActivityIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings)
+        {
+            Intent intent = new Intent(RecyclerActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_help)
+        {
+            Intent intent = new Intent(RecyclerActivity.this, HelpActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_main)
+        {
+            Intent intent = new Intent(RecyclerActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_recycler)
+        {
+            Intent intent = new Intent(RecyclerActivity.this, RecyclerActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

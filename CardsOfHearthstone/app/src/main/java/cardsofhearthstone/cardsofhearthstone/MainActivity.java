@@ -58,6 +58,21 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.action_help)
+        {
+            Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_main)
+        {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_recycler)
+        {
+            Intent intent = new Intent(MainActivity.this, RecyclerActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
