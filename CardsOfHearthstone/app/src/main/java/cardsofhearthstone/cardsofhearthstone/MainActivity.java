@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,RecyclerActivity.class);
+                FetchCardsTask fetchCardsTask=new FetchCardsTask();
+                fetchCardsTask.execute("https://api.hearthstonejson.com/v1/25770/enUS/cards.collectible.json");
                 startActivity(intent);
             }
         });
