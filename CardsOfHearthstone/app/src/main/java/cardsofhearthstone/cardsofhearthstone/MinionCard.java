@@ -1,16 +1,30 @@
 package cardsofhearthstone.cardsofhearthstone;
 
-public class MinionCards {
-    String ID;
-    String Type;
-    String Rarity;
-    String Name;
-    String Artist;
-    String CardClass;
-    boolean Collectible;
-    int Cost;
-    int Health;
-    int Attack;
+public class MinionCard {
+    private String ID;
+    //    "cardId":"GAME_002",
+    //    "dbfId":"1733",
+    private String Type = "Minion";
+    //    "type":"Minion",
+    private String Rarity;
+    //    "rarity":"Free",
+    private String Name;
+    //    "name":"Avatar of the Coin",
+    private String CardClass;
+    //    "cardSet":"Basic",
+    private String imgURL;
+    //    "img":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/original\/GAME_002.png",
+    //    "imgGold":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/animated\/GAME_002_premium.gif",
+    private String text;
+    //    "text":"<i>You lost the coin flip, but gained a friend.<\/i>",
+    private int Cost;
+    //    "cost":0,"playerClass":"Neutral",
+    private int Health;
+    //    "health":1,
+    private int Attack;
+    //    "attack":1,
+    private boolean Collectible;
+    // if exist in data
 
     public String getID() {
         return ID;
@@ -42,14 +56,6 @@ public class MinionCards {
 
     public void setName(String name) {
         Name = name;
-    }
-
-    public String getArtist() {
-        return Artist;
-    }
-
-    public void setArtist(String artist) {
-        Artist = artist;
     }
 
     public String getCardClass() {
@@ -90,5 +96,21 @@ public class MinionCards {
 
     public void setAttack(int attack) {
         Attack = attack;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 }

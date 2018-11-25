@@ -1,15 +1,14 @@
 package cardsofhearthstone.cardsofhearthstone;
 
-public class HeroCards {
+public class SpellCard {
     String ID;
     String Type;
-    String Rarity;
     String Name;
     String Artist;
     String CardClass;
-    int armor;
+    boolean Collectible;
     int Cost;
-    int Health;
+    String Rarity;
 
     public void setID(String ID) {
         this.ID = ID;
@@ -39,17 +38,11 @@ public class HeroCards {
         Collectible = collectible;
     }
 
-    public void setArmor(int armor) {
-        this.armor = armor;
-    }
-
     public void setCost(int cost) {
         Cost = cost;
     }
 
-    public void setHealth(int health) {
-        Health = health;
-    }
+
 
     public String getID() {
         return ID;
@@ -79,19 +72,9 @@ public class HeroCards {
         return Collectible;
     }
 
-    public int getArmor() {
-        return armor;
-    }
-
     public int getCost() {
         return Cost;
     }
-
-    public int getHealth() {
-        return Health;
-    }
-
-    boolean Collectible;
 
 
 }

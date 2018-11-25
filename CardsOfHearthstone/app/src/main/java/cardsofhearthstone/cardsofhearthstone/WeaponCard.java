@@ -1,6 +1,6 @@
 package cardsofhearthstone.cardsofhearthstone;
 
-public class WeaponCards {
+public class WeaponCard {
     String ID;
     String Type;
     String Rarity;
