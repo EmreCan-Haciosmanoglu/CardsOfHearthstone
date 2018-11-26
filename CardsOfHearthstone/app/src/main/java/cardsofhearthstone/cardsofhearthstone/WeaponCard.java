@@ -11,6 +11,15 @@ public class WeaponCard {
     int Durability;
     int Cost;
     int Attack;
+    private String imgURL;;
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
 
     public String getArtist() {
         return Artist;

@@ -1,5 +1,6 @@
 package cardsofhearthstone.cardsofhearthstone;
 
+import android.database.DatabaseErrorHandler;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -75,6 +76,8 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
     String DATA_CARD_HEALTH = "health";
     String DATA_CARD_ATTACK = "attack";
     String DATA_CARD_IS_COLLECTIBLE = "collectible";
+    String DATA_CARD_DURABILTY="durability";
+    String DATA_CARD_ARMOR="armor";
 
     @Override
     protected String[] doInBackground(String... strings) {
@@ -215,14 +218,27 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                         {
                             minionCard.setRarity("Unknown");
                         }
-                        minionCard.setName(card.getString(DATA_CARD_NAME));
-                        //    "name":"Avatar of the Coin",
-                        minionCard.setCardClass(card.getString(DATA_CARD_SET));
-                        //    "cardSet":"Basic",
-                        minionCard.setImgURL(card.getString(DATA_CARD_IMG_URL));
-                        //    "img":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/original\/GAME_002.png",
-                        //    "imgGold":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/animated\/GAME_002_premium.gif",
-                        //    "attack":1,
+                        if(card.has(DATA_CARD_NAME)){
+                            minionCard.setName(card.getString(DATA_CARD_NAME));
+                            //    "name":"Avatar of the Coin",
+                        } else{
+                            minionCard.setName("Unknown");
+                        }
+                        if(card.has(DATA_CARD_SET)){
+                            minionCard.setCardClass(card.getString(DATA_CARD_SET));
+                            //    "cardSet":"Basic",
+                        } else{
+                            minionCard.setCardClass("Unknown");
+                        }
+                        if(card.has(DATA_CARD_IMG_URL)){
+                            minionCard.setImgURL(card.getString(DATA_CARD_IMG_URL));
+                            //    "img":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/original\/GAME_002.png",
+                            //    "imgGold":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/animated\/GAME_002_premium.gif",
+                            //    "attack":1,
+                        } else{
+                            minionCard.setImgURL("Unknown");
+                        }
+
                         if(card.has(DATA_CARD_TEXT))
                         {
                             minionCard.setText(card.getString(DATA_CARD_TEXT));
@@ -257,10 +273,63 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                     }
                     else if(type.equals(CARD_TYPES[1]))
                     {
+                        WeaponCard weaponCard=new WeaponCard();
+
+                        weaponCard.setID(card.getString(DATA_CARD_ID));
+                        if(card.has(DATA_CARD_NAME)){
+                            weaponCard.setName(card.getString(DATA_CARD_NAME));
+                        } else{
+                            weaponCard.setName("unknown");
+                        }
+                        if(card.has(DATA_CARD_IMG_URL)){
+                            weaponCard.setImgURL(card.getString(DATA_CARD_IMG_URL));
+                        } else{
+                            weaponCard.setImgURL("unknown");
+                        }
+                        if(card.has(DATA_CARD_SET)){
+                            weaponCard.setCardClass(card.getString(DATA_CARD_SET));
+                        } else{
+                            weaponCard.setCardClass("unknown");
+                        }
+                        if(card.has(DATA_CARD_COST)){
+                            weaponCard.setCost(card.getInt(DATA_CARD_COST));
+                        } else{
+                            weaponCard.setCost(0);
+                        }
+                        if(card.has(DATA_CARD_ATTACK)){
+                            weaponCard.setAttack(card.getInt(DATA_CARD_ATTACK));
+                        } else{
+                            weaponCard.setAttack(0);
+                        }
+                        if(card.has(DATA_CARD_DURABILTY)){
+                            weaponCard.setDurability(card.getInt(DATA_CARD_DURABILTY));
+                        } else{
+                            weaponCard.setDurability(0);
+                        }
+                        if(card.has(DATA_CARD_RARITY)){
+                            weaponCard.setRarity(card.getString(DATA_CARD_RARITY));
+
+                        } else{
+                            weaponCard.setRarity("unknown");
+                        }
+
+                        weaponCard.setCollectible(card.getBoolean(DATA_CARD_IS_COLLECTIBLE));
+                        weaponCards.add(weaponCard);
 
                     }
                     else if(type.equals(CARD_TYPES[2]))
                     {
+                        HeroCard heroCard=new HeroCard();
+
+                        heroCard.setID(card.getString(DATA_CARD_ID));
+                        heroCard.setName(card.getString(DATA_CARD_NAME));
+                        heroCard.setCardClass(card.getString(DATA_CARD_SET));
+                        heroCard.setRarity(card.getString(DATA_CARD_RARITY));
+                        heroCard.setArmor(card.getInt(DATA_CARD_ARMOR));
+                        heroCard.setCollectible(card.getBoolean(DATA_CARD_IS_COLLECTIBLE));
+                        heroCard.setHealth(card.getInt(DATA_CARD_HEALTH));
+                        heroCard.setCost(card.getInt(DATA_CARD_COST));
+
 
                     }
                     else if(type.equals(CARD_TYPES[3]))
