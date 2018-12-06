@@ -50,6 +50,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
 
     @Override
     protected String[] doInBackground(String... strings) {
+        SetURL();
         try
         {
             HttpResponse<JsonNode> response;
@@ -103,10 +104,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                         MinionCard minionCard = new MinionCard();
 
                         minionCard.setID(card.getString(Helper.DATA_CARD_ID));
-                        //    "cardId":"GAME_002",
-                        //    "dbfId":"1733",
-                        //minionCard.setType(card.getString(DATA_CARD_TYPE));
-                        //    "type":"Minion",
+
                         if (card.has(Helper.DATA_CARD_RARITY)) {
                             minionCard.setRarity(card.getString(Helper.DATA_CARD_RARITY));
                             //    "rarity":"Free",
@@ -155,10 +153,12 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                         } else {
                             minionCard.setCollectible(false);
                         }
+
                         minionCards.add(minionCard);
+
                     } else if (type.equals(Helper.CARD_TYPES[1])) {
                         WeaponCard weaponCard = new WeaponCard();
-
+/*
                         weaponCard.setID(card.getString(Helper.DATA_CARD_ID));
                         if (card.has(Helper.DATA_CARD_NAME)) {
                             weaponCard.setName(card.getString(Helper.DATA_CARD_NAME));
@@ -202,7 +202,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                             weaponCard.setCollectible(false);
                         }
                         weaponCards.add(weaponCard);
-
+*/
                     } else if (type.equals(Helper.CARD_TYPES[2])) {/*
                         HeroCard heroCard = new HeroCard();
 

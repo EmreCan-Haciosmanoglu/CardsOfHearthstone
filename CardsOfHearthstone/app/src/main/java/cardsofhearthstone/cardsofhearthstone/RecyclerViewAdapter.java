@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHolder> {
@@ -55,7 +57,7 @@ class RecyclerViewViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     }
     public void setData(MinionCard clickedData, int i) {
-        this.image.setImageResource(clickedData.getImageId());
+        Picasso.get().load(clickedData.getImgURL()).into(image);
     }
 
     @Override

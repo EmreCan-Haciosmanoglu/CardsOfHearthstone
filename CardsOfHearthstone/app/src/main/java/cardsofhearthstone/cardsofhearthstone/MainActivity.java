@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,RecyclerActivity.class);
-                FetchCardsTask fetchCardsTask=new FetchCardsTask(con);
-                fetchCardsTask.execute("https://api.hearthstonejson.com/v1/25770/enUS/cards.collectible.json");
                 startActivity(intent);
             }
         });
@@ -80,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if ( id == R.id.action_refresh)
         {
-            FetchCardsTask m_Task = new FetchCardsTask(con);
-            m_Task.execute();
+
         }
 
         return super.onOptionsItemSelected(item);

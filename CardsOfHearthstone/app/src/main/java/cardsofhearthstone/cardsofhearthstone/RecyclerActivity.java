@@ -29,13 +29,16 @@ public class RecyclerActivity extends AppCompatActivity implements ListItemClick
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RecyclerViewAdapter adapter=new RecyclerViewAdapter(this,Datas.getData(),this);
         recyclerView=(RecyclerView)findViewById(R.id.recyclerView);
+        FetchCardsTask fetchCardsTask=new FetchCardsTask(this,recyclerView,this);
+        fetchCardsTask.execute("");
+
+
 
         gridLayoutManager = new GridLayoutManager(this,2);
         layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
 
-        recyclerView.setAdapter(adapter);
+        /*recyclerView.setAdapter(adapter);
         if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
             Log.v("tagg","land");
             recyclerView.setLayoutManager(gridLayoutManager);
@@ -45,7 +48,7 @@ public class RecyclerActivity extends AppCompatActivity implements ListItemClick
             recyclerView.setLayoutManager(layoutManager);
             Log.v("tagg","port");
 
-        }
+        }*/
 
 
     }
