@@ -1,6 +1,9 @@
 package cardsofhearthstone.cardsofhearthstone;
 
+import java.util.ArrayList;
+
 public class MinionCard extends Card {
+    static ArrayList<MinionCard> cards = new ArrayList<MinionCard>();
     private String ID;
     //    "cardId":"GAME_002",
     //    "dbfId":"1733",

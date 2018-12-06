@@ -98,6 +98,21 @@ public class RecyclerActivity extends AppCompatActivity implements ListItemClick
             Intent intent = new Intent(RecyclerActivity.this, RecyclerActivity.class);
             startActivity(intent);
         }
+        if(id == R.id.action_refresh)
+        {
+            Log.v("Testify", "Neden Yani nedeeeeeeeeeeeeeeeen");
+            recyclerView.setAdapter(new RecyclerViewAdapter(this,MinionCard.cards,this));
+            layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+            recyclerView.setLayoutManager(layoutManager);
+
+        }
+        if(id == R.id.action_refresh_data)
+        {
+            FetchCardsTask fetchCardsTask=new FetchCardsTask(this,recyclerView,this);
+            fetchCardsTask.execute("");
+
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

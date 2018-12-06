@@ -28,4 +28,9 @@
         android:orderInCategory="103"
         android:title="@string/action_refresh"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_refresh_data"
+        android:orderInCategory="103"
+        android:title="Data"
+        app:showAsAction="always" />
 </menu>

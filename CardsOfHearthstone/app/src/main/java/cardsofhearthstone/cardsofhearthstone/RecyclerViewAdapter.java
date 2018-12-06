@@ -4,6 +4,7 @@ package cardsofhearthstone.cardsofhearthstone;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewViewHolder recyclerViewViewHolder, int i) {
         MinionCard clickedData=mDataList.get(i);
-        recyclerViewViewHolder.setData(clickedData,i);
+        recyclerViewViewHolder.setData(clickedData);
 
     }
 
@@ -56,7 +57,8 @@ class RecyclerViewViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
 
     }
-    public void setData(MinionCard clickedData, int i) {
+    public void setData(MinionCard clickedData) {
+        Log.v("Testify", clickedData.getImgURL());
         Picasso.get().load(clickedData.getImgURL()).into(image);
     }
 

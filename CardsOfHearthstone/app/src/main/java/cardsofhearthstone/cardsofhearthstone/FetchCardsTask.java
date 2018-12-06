@@ -67,6 +67,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
     }
 
     private void getCards(HttpResponse<JsonNode> node) {
+        MinionCard.cards = new ArrayList<MinionCard>();
         try {
             JSONObject data = node.getBody().getObject();
             JSONArray[] cardArrays = {
@@ -153,8 +154,8 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                         } else {
                             minionCard.setCollectible(false);
                         }
-
-                        minionCards.add(minionCard);
+                        Log.v("minionCard", minionCard.getName());
+                        MinionCard.cards.add(minionCard);
 
                     } else if (type.equals(Helper.CARD_TYPES[1])) {
                         WeaponCard weaponCard = new WeaponCard();
@@ -227,7 +228,6 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                     }
                 }
             }
-            m_TempRV.setAdapter(new RecyclerViewAdapter(m_Context,minionCards,m_Listener));
             Log.v("minion", "" + minionCards.size());
         } catch (Exception e) {
             Log.v("ERROR", e.getMessage());
@@ -243,7 +243,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
     {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(m_Context);
         String attack       = sharedPreferences.getString("attack"      , "-1");
-        String collectible  = sharedPreferences.getString("collectible" , "-1");
+        boolean collectible  = sharedPreferences.getBoolean("collectible" , false);
         String cost         = sharedPreferences.getString("cost"        , "-1");
         String durability   = sharedPreferences.getString("durability"  , "-1");
         String health       = sharedPreferences.getString("health"      , "-1");
@@ -262,7 +262,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
             case AllCards:
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?"
                         +(attack.equals("-1")       ?"":("attack="+attack+"&"))
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(cost.equals("-1")         ?"":("cost="+cost+"&"))
                         +(durability.equals("-1")   ?"":("durability="+durability+"&"))
                         +(health.equals("-1")       ?"":("health="+health+"&"))
@@ -271,14 +271,14 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
             case Search:
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/"
                         +(name) + "?"
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(locale);
                 break;
             case SearchBySet:
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/"
                         +(set) + "?"
                         +(attack.equals("-1")       ?"":("attack="+attack+"&"))
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(cost.equals("-1")         ?"":("cost="+cost+"&"))
                         +(durability.equals("-1")   ?"":("durability="+durability+"&"))
                         +(health.equals("-1")       ?"":("health="+health+"&"))
@@ -288,7 +288,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/"
                         +(cls) + "?"
                         +(attack.equals("-1")       ?"":("attack="+attack+"&"))
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(cost.equals("-1")         ?"":("cost="+cost+"&"))
                         +(durability.equals("-1")   ?"":("durability="+durability+"&"))
                         +(health.equals("-1")       ?"":("health="+health+"&"))
@@ -298,7 +298,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/factions/"
                         +(faction) + "?"
                         +(attack.equals("-1")       ?"":("attack="+attack+"&"))
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(cost.equals("-1")         ?"":("cost="+cost+"&"))
                         +(durability.equals("-1")   ?"":("durability="+durability+"&"))
                         +(health.equals("-1")       ?"":("health="+health+"&"))
@@ -308,7 +308,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/qualities/"
                         +(quality) + "?"
                         +(attack.equals("-1")       ?"":("attack="+attack+"&"))
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(cost.equals("-1")         ?"":("cost="+cost+"&"))
                         +(durability.equals("-1")   ?"":("durability="+durability+"&"))
                         +(health.equals("-1")       ?"":("health="+health+"&"))
@@ -318,7 +318,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/"
                         +(race) + "?"
                         +(attack.equals("-1")       ?"":("attack="+attack+"&"))
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(cost.equals("-1")         ?"":("cost="+cost+"&"))
                         +(durability.equals("-1")   ?"":("durability="+durability+"&"))
                         +(health.equals("-1")       ?"":("health="+health+"&"))
@@ -328,7 +328,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                 URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/types/"
                         +(type) + "?"
                         +(attack.equals("-1")       ?"":("attack="+attack+"&"))
-                        +(collectible.equals("-1")  ?"":("collectible="+collectible+"&"))
+                        +(collectible               ?"":("collectible=1&"))
                         +(cost.equals("-1")         ?"":("cost="+cost+"&"))
                         +(durability.equals("-1")   ?"":("durability="+durability+"&"))
                         +(health.equals("-1")       ?"":("health="+health+"&"))
