@@ -34,14 +34,18 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
 
 
     Context m_Context;
+    RecyclerView m_TempRV;
+    ListItemClickListener m_Listener;
     public EndPointTypes endPointType = EndPointTypes.AllCards;
     public String URL = "";
 
 
 
-    public FetchCardsTask(Context c)
+    public FetchCardsTask(Context c, RecyclerView rv, ListItemClickListener listener)
     {
         m_Context = c;
+        m_TempRV = rv;
+        m_Listener = listener;
     }
 
     @Override
@@ -223,6 +227,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
                     }
                 }
             }
+            m_TempRV.setAdapter(new RecyclerViewAdapter(m_Context,minionCards,m_Listener));
             Log.v("minion", "" + minionCards.size());
         } catch (Exception e) {
             Log.v("ERROR", e.getMessage());

@@ -1,6 +1,6 @@
 package cardsofhearthstone.cardsofhearthstone;
 
-public class MinionCard {
+public class MinionCard extends Card {
     private String ID;
     //    "cardId":"GAME_002",
     //    "dbfId":"1733",

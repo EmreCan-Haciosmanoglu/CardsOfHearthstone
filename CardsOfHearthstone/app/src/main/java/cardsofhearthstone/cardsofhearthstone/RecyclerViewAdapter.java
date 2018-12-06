@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHolder> {
     private Context mContext;
-    private ArrayList<Datas> mDataList;
+    private ArrayList<MinionCard> mDataList;
     private ListItemClickListener mOnClickListener;
 
-    public RecyclerViewAdapter(Context Context, ArrayList<Datas> DataList, ListItemClickListener listener) {
+    public RecyclerViewAdapter(Context Context, ArrayList<MinionCard> DataList, ListItemClickListener listener) {
         mContext = Context;
         mDataList=DataList;
         mOnClickListener = listener;
@@ -32,14 +32,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewViewHolder recyclerViewViewHolder, int i) {
-        Datas clickedData=mDataList.get(i);
+        MinionCard clickedData=mDataList.get(i);
         recyclerViewViewHolder.setData(clickedData,i);
 
     }
 
     @Override
     public int getItemCount() {
-        return Datas.getData().size();
+        return mDataList.size();
     }
 }
 class RecyclerViewViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -54,7 +54,7 @@ class RecyclerViewViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
 
     }
-    public void setData(Datas clickedData, int i) {
+    public void setData(MinionCard clickedData, int i) {
         this.image.setImageResource(clickedData.getImageId());
     }
 
