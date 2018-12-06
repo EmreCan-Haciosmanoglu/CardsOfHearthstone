@@ -23,16 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
-
-    String cardData = null;
-    ArrayList<MinionCard> minionCards = new ArrayList<MinionCard>();
-    ArrayList<WeaponCard> weaponCards = new ArrayList<WeaponCard>();
-    ArrayList<HeroCard> heroCards = new ArrayList<HeroCard>();
-    ArrayList<SpellCard> spellCards = new ArrayList<SpellCard>();
-    ArrayList<EnchantmentCard> enchantmentCards = new ArrayList<EnchantmentCard>();
-
-
+public class FetchCardsTask extends AsyncTask<String, Void, String[]>
+{
     Context m_Context;
     RecyclerView m_TempRV;
     ListItemClickListener m_Listener;
@@ -67,7 +59,7 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
     }
 
     private void getCards(HttpResponse<JsonNode> node) {
-        MinionCard.cards = new ArrayList<MinionCard>();
+        Card.cards = new ArrayList<Card>();
         try {
             JSONObject data = node.getBody().getObject();
             JSONArray[] cardArrays = {
@@ -100,124 +92,38 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
             for (int i = 0; i < cardArrays.length; i++) {
                 for (int j = 0; j < cardArrays[i].length(); j++) {
                     JSONObject card = cardArrays[i].getJSONObject(j);
-                    String type = card.getString(Helper.DATA_CARD_TYPE);
-                    if (type.equals(Helper.CARD_TYPES[0])) {
-                        MinionCard minionCard = new MinionCard();
 
-                        minionCard.setID(card.getString(Helper.DATA_CARD_ID));
+                    Card c = new Card();
 
-                        if (card.has(Helper.DATA_CARD_RARITY)) {
-                            minionCard.setRarity(card.getString(Helper.DATA_CARD_RARITY));
-                            //    "rarity":"Free",
-                        } else {
-                            minionCard.setRarity("Unknown");
-                        }
-                        if (card.has(Helper.DATA_CARD_NAME)) {
-                            minionCard.setName(card.getString(Helper.DATA_CARD_NAME));
-                            //    "name":"Avatar of the Coin",
-                        } else {
-                            minionCard.setName("Unknown");
-                        }
-                        if (card.has(Helper.DATA_CARD_SET)) {
-                            minionCard.setCardClass(card.getString(Helper.DATA_CARD_SET));
-                            //    "cardSet":"Basic",
-                        } else {
-                            minionCard.setCardClass("Unknown");
-                        }
-                        if (card.has(Helper.DATA_CARD_IMG_URL)) {
-                            minionCard.setImgURL(card.getString(Helper.DATA_CARD_IMG_URL));
-                            //    "img":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/original\/GAME_002.png",
-                            //    "imgGold":"http:\/\/wow.zamimg.com\/images\/hearthstone\/cards\/enus\/animated\/GAME_002_premium.gif",
-                            //    "attack":1,
-                        } else {
-                            minionCard.setImgURL("Unknown");
-                        }
+                    c.setID(card.getString(Helper.DATA_CARD_ID));
+                    if (card.has(Helper.DATA_CARD_RARITY))
+                        c.setRarity(card.getString(Helper.DATA_CARD_RARITY));
+                    if (card.has(Helper.DATA_CARD_TYPE))
+                        c.setType(card.getString(Helper.DATA_CARD_TYPE));
+                    if (card.has(Helper.DATA_CARD_NAME))
+                        c.setName(card.getString(Helper.DATA_CARD_NAME));
+                    if (card.has(Helper.DATA_CARD_SET))
+                        c.setCardClass(card.getString(Helper.DATA_CARD_SET));
+                    if (card.has(Helper.DATA_CARD_IMG_URL))
+                        c.setImgURL(card.getString(Helper.DATA_CARD_IMG_URL));
+                    if (card.has(Helper.DATA_CARD_TEXT))
+                        c.setText(card.getString(Helper.DATA_CARD_TEXT));
+                    if (card.has(Helper.DATA_CARD_COST))
+                        c.setCost(card.getInt(Helper.DATA_CARD_COST));
+                    if (card.has(Helper.DATA_CARD_HEALTH))
+                        c.setHealth(card.getInt(Helper.DATA_CARD_HEALTH));
+                    if (card.has(Helper.DATA_CARD_ATTACK))
+                        c.setAttack(card.getInt(Helper.DATA_CARD_ATTACK));
+                    if (card.has(Helper.DATA_CARD_IS_COLLECTIBLE))
+                        c.setCollectible(card.getBoolean(Helper.DATA_CARD_IS_COLLECTIBLE));
+                    if (card.has(Helper.DATA_CARD_DURABILITY))
+                        c.setDurability(card.getInt(Helper.DATA_CARD_DURABILITY));
+                    if (card.has(Helper.DATA_CARD_ARMOR))
+                        c.setArmor(card.getInt(Helper.DATA_CARD_ARMOR));
 
-                        if (card.has(Helper.DATA_CARD_TEXT)) {
-                            minionCard.setText(card.getString(Helper.DATA_CARD_TEXT));
-                            //    "text":"<i>You lost the coin flip, but gained a friend.<\/i>",
-                        } else {
-                            minionCard.setText("");
-                        }
-                        if (card.has(Helper.DATA_CARD_COST)) {
-                            minionCard.setCost(card.getInt(Helper.DATA_CARD_COST));
-                        } else {
-                            minionCard.setCost(0);
-                        }
-                        //    "cost":0,"playerClass":"Neutral",
-                        minionCard.setHealth(card.getInt(Helper.DATA_CARD_HEALTH));
-                        //    "health":1,
-                        minionCard.setAttack(card.getInt(Helper.DATA_CARD_ATTACK));
-                        //    "attack":1,
-                        if (card.has(Helper.DATA_CARD_IS_COLLECTIBLE)) {
-                            minionCard.setCollectible(card.getBoolean(Helper.DATA_CARD_IS_COLLECTIBLE));
-                        } else {
-                            minionCard.setCollectible(false);
-                        }
-                        Log.v("minionCard", minionCard.getName());
-                        MinionCard.cards.add(minionCard);
-
-                    } else if (type.equals(Helper.CARD_TYPES[1])) {
-                        WeaponCard weaponCard = new WeaponCard();
+                    Card.cards.add(c);
 /*
-                        weaponCard.setID(card.getString(Helper.DATA_CARD_ID));
-                        if (card.has(Helper.DATA_CARD_NAME)) {
-                            weaponCard.setName(card.getString(Helper.DATA_CARD_NAME));
-                        } else {
-                            weaponCard.setName("unknown");
-                        }
-                        if (card.has(Helper.DATA_CARD_IMG_URL)) {
-                            weaponCard.setImgURL(card.getString(Helper.DATA_CARD_IMG_URL));
-                        } else {
-                            weaponCard.setImgURL("unknown");
-                        }
-                        if (card.has(Helper.DATA_CARD_SET)) {
-                            weaponCard.setCardClass(card.getString(Helper.DATA_CARD_SET));
-                        } else {
-                            weaponCard.setCardClass("unknown");
-                        }
-                        if (card.has(Helper.DATA_CARD_COST)) {
-                            weaponCard.setCost(card.getInt(Helper.DATA_CARD_COST));
-                        } else {
-                            weaponCard.setCost(0);
-                        }
-                        if (card.has(Helper.DATA_CARD_ATTACK)) {
-                            weaponCard.setAttack(card.getInt(Helper.DATA_CARD_ATTACK));
-                        } else {
-                            weaponCard.setAttack(0);
-                        }
-                        if (card.has(Helper.DATA_CARD_DURABILITY)) {
-                            weaponCard.setDurability(card.getInt(Helper.DATA_CARD_DURABILITY));
-                        } else {
-                            weaponCard.setDurability(0);
-                        }
-                        if (card.has(Helper.DATA_CARD_RARITY)) {
-                            weaponCard.setRarity(card.getString(Helper.DATA_CARD_RARITY));
-
-                        } else {
-                            weaponCard.setRarity("unknown");
-                        }
-                        if (card.has(Helper.DATA_CARD_IS_COLLECTIBLE)) {
-                            weaponCard.setCollectible(card.getBoolean(Helper.DATA_CARD_IS_COLLECTIBLE));
-                        } else {
-                            weaponCard.setCollectible(false);
-                        }
-                        weaponCards.add(weaponCard);
-*/
-                    } else if (type.equals(Helper.CARD_TYPES[2])) {/*
-                        HeroCard heroCard = new HeroCard();
-
-                        heroCard.setID(card.getString(Helper.DATA_CARD_ID));
-                        heroCard.setName(card.getString(Helper.DATA_CARD_NAME));
-                        heroCard.setCardClass(card.getString(Helper.DATA_CARD_SET));
-                        heroCard.setRarity(card.getString(Helper.DATA_CARD_RARITY));
-                        heroCard.setArmor(card.getInt(Helper.DATA_CARD_ARMOR));
-                        heroCard.setCollectible(card.getBoolean(Helper.DATA_CARD_IS_COLLECTIBLE));
-                        heroCard.setHealth(card.getInt(Helper.DATA_CARD_HEALTH));
-                        heroCard.setCost(card.getInt(Helper.DATA_CARD_COST));
-
-*/
-                    } else if (type.equals(Helper.CARD_TYPES[3])) {
+                    if (type.equals(Helper.CARD_TYPES[3])) {
 
                     } else if (type.equals(Helper.CARD_TYPES[4])) {
 
@@ -225,10 +131,9 @@ public class FetchCardsTask extends AsyncTask<String, Void, String[]> {
 
                     } else {
                         Log.v("type", type);
-                    }
+                    }*/
                 }
             }
-            Log.v("minion", "" + minionCards.size());
         } catch (Exception e) {
             Log.v("ERROR", e.getMessage());
         }
