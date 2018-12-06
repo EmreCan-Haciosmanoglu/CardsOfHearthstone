@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CardsOfHearthstone</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="action_recycler">Kartlar</string>
+    <string name="action_main">Ev</string>
+    <string name="action_help">Yardım</string>
+    <string name="action_refresh">Yenile</string>
+    <string name="title_activity_recycler">RecyclerActivity</string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string-array name="Language">
+        <item>İngilizce (ABD)</item>
+        <item>Türkçe</item>
+
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="welcome_to_cards_of_hearthstone">Cards Of Hearthstona hoş geldiniz</string>
+    <string name="start_apllication">Başla</string>
+    <string name="how_to_use">Nasıl Kullanılır</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_help">HelpActivity</string>
+</resources>

@@ -8,7 +8,7 @@
         android:title        ="Attack"
         android:key          ="attack"
         android:defaultValue ="-1"
-        android:inputType    ="number"
+        android:inputType    ="text"
         android:singleLine   ="true">
     </EditTextPreference>
 
@@ -23,7 +23,7 @@
         android:title        ="Cost"
         android:key          ="cost"
         android:defaultValue ="-1"
-        android:inputType    ="number"
+        android:inputType    ="text"
         android:singleLine   ="true">
     </EditTextPreference>
 
@@ -31,7 +31,7 @@
         android:title        ="Durability"
         android:key          ="durability"
         android:defaultValue ="-1"
-        android:inputType    ="number"
+        android:inputType    ="text"
         android:singleLine   ="true">
     </EditTextPreference>
 
@@ -39,9 +39,17 @@
         android:title        ="Health"
         android:key          ="health"
         android:defaultValue ="-1"
-        android:inputType    ="number"
+        android:inputType    ="text"
         android:singleLine   ="true">
     </EditTextPreference>
+    <ListPreference
+        android:key="language"
+        android:title="Language"
+        android:defaultValue="#00FFFF"
+        android:entries="@array/Language"
+        android:entryValues="@array/Language"
+        android:summary="Select a foreground color"
+        />
 
 
 </PreferenceScreen>
