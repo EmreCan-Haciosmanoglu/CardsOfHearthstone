@@ -28,14 +28,6 @@ public class Helper {
             "Debug"
     };
     static String DATA_CARD_TYPE = "type";
-    static final String[] CARD_TYPES = {
-            "Minion",
-            "Weapon",
-            "Hero",
-            "Spell",
-            "Enchantment",
-            "Hero Power"
-    };
     static String DATA_CARD_ID = "cardId";
     static String DATA_CARD_RARITY = "rarity";
     static String DATA_CARD_NAME = "name";

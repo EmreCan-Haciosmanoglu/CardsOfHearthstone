@@ -101,7 +101,7 @@ public class RecyclerActivity extends AppCompatActivity implements ListItemClick
         if(id == R.id.action_refresh)
         {
             Log.v("Testify", "Neden Yani nedeeeeeeeeeeeeeeeen");
-            recyclerView.setAdapter(new RecyclerViewAdapter(this,MinionCard.cards,this));
+            recyclerView.setAdapter(new RecyclerViewAdapter(this, this));
             layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
             recyclerView.setLayoutManager(layoutManager);
 
