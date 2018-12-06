@@ -4,6 +4,7 @@
     <string name="action_recycler">Cards</string>
     <string name="action_main">Home</string>
     <string name="action_help">Help</string>
+    <string name="action_refresh">Refresh</string>
     <string name="title_activity_recycler">RecyclerActivity</string>
     <string name="title_activity_settings">Settings</string>
 

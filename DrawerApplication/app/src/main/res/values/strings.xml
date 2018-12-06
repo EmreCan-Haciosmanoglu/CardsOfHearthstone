@@ -12,4 +12,14 @@
     <string name="action_recycler">Cards</string>
     <string name="action_main">Home</string>
     <string name="action_help">Help</string>
+    <string-array name="items">
+        <item>All Cards</item>
+        <item>Search</item>
+        <item>Search By Set</item>
+        <item>Search By Class</item>
+        <item>Search By Faction</item>
+        <item>Search By Quality</item>
+        <item>Search By Race</item>
+        <item>Search By Type</item>
+    </string-array>
 </resources>

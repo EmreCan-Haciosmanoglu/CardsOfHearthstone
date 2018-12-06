@@ -1,5 +1,6 @@
 package cardsofhearthstone.cardsofhearthstone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,13 +13,13 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
+    Context con;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         String[] aray=new String[5];
-
+        con = this;
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,RecyclerActivity.class);
-                FetchCardsTask fetchCardsTask=new FetchCardsTask();
+                FetchCardsTask fetchCardsTask=new FetchCardsTask(con);
                 fetchCardsTask.execute("https://api.hearthstonejson.com/v1/25770/enUS/cards.collectible.json");
                 startActivity(intent);
             }
@@ -76,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(MainActivity.this, RecyclerActivity.class);
             startActivity(intent);
+        }
+        if ( id == R.id.action_refresh)
+        {
+            FetchCardsTask m_Task = new FetchCardsTask(con);
+            m_Task.execute();
         }
 
         return super.onOptionsItemSelected(item);
